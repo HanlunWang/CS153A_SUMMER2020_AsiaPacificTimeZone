@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Card = ({ movie }) => {
+const Card = ({ classes }) => {
   return (
     <div className='card'>
-      <img src={movie.img.src} className='card-img-top' alt={movie.img.alt} />
+      <img src={classes.img.src} className='card-img-top' alt={classes.img.alt} />
       <div className='card-body'>
-        <h2 className='card-title'>{`#${movie.ranking} - ${movie.title} (${movie.year})`}</h2>
+        <h2 className='card-title'>{`${classes.ClassID} - ${classes.Name} `}</h2>
       </div>
       <ul className='list-group list-group-flush'>
-        <li className='list-group-item'>{`Distributor: ${movie.distributor}`}</li>
-        <li className='list-group-item'>{`Amount: ${movie.amount}`}</li>
+        <li className='list-group-item'>{`Instructor: ${classes.Instructor}`}</li>
+        <li className='list-group-item'>{`Time: ${classes.Time}`}</li>
       </ul>
     </div>
   );

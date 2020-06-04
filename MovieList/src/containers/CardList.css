@@ -1,12 +1,12 @@
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  background-color: green;
+  background-color: rgb(86, 94, 196);
 }
 
 .flex-container-element {
-  background-color: #000000;
-  width: 300px;
+  background-color: rgb(86, 94, 196);
+  width: 400px;
   margin: 10px;
   text-align: center;
   line-height: 75px;
