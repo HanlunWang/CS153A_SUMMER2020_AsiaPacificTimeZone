@@ -1,22 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styled from 'styled-components';
 import CardList from './containers/CardList';
-
-
 import SaleList from './containers/SaleList';
-
 
 import saleData from '../assets/sales.js';
 
+const Header = styled.div`
+  background-color: #1a1a1a;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`;
 
 const App = () => {
   return (
    <>
-    <div className="jumbotron">
+    <Header>
       <h1>List of Items for Sale</h1>
       <p>This is the list of the used items for sale.</p>
-    </div>
+    </Header>
 
     <SaleList data={saleData} name="List of Item for Sales" />
     <div className='container-fluid'>
