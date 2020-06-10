@@ -12,6 +12,7 @@ const Card = ({ sales }) => {
         <li className='list-group-item'>{`phone: ${sales.phone}`}</li>
         <li className='list-group-item'>{`email: ${sales.email}`}</li>
         <li className='list-group-item'>{`detail: ${sales.detail}`}</li>
+        <button type="button" onclick="alert('Hello world!')">Add to cart</button>
       </ul>
     </div>
   );
