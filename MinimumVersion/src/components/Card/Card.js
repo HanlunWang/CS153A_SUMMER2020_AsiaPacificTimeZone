@@ -12,7 +12,7 @@ const Card = ({ sales }) => {
         <li className='list-group-item'>{`phone: ${sales.phone}`}</li>
         <li className='list-group-item'>{`email: ${sales.email}`}</li>
         <li className='list-group-item'>{`detail: ${sales.detail}`}</li>
-        <button type="button" onclick="alert('Hello world!')">Add to cart</button>
+        <button type="button">Add to cart</button>
       </ul>
     </div>
   );
@@ -21,19 +21,4 @@ const Card = ({ sales }) => {
 Card.propTypes = {
   sales: PropTypes.object.isRequired
 }
-/*
-Card.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string,
-    distributor: PropTypes.string,
-    year: PropTypes.number,
-    amount: PropTypes.string,
-    img: PropTypes.shape({
-      src: PropTypes.string,
-      alt: PropTypes.string,
-    }),
-    ranking: PropTypes.number,
-  }).isRequired,
-};
-*/
 export default Card;

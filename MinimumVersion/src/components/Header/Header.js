@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
-//import {Link} from 'react-router-dom';
+import {
+  Nav,
+  Navbar,
+  NavDropdown,
+  Button,
+  Form,
+  FormControl
+} from 'react-bootstrap';
 
-export default class Header extends Component {
+
+class Header extends Component {
   render(){
     return(
-      <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Ebay Killer</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" href="#">Log in</a>
-              <a class="nav-item nav-link" href="#">Register</a>
-              <a class="nav-item nav-link" href="#">My cart</a>
-            </div>
-          </div>
-        </nav>
-      </div>
-    )
+      <Navbar bg="dark" variant="dark" fixed="top">
+      <Navbar.Brand href="#home">BranBay</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="#home">Home</Nav.Link>
+          <Nav.Link href="#link">Account</Nav.Link>
+          <NavDropdown title="Categories" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Clothing</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Books</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Electronics</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.4">Furnitures</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.5">Others</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.6">All Items</NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+        <Form inline>
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <Button variant="primary">Search</Button>
+        </Form>
+      </Navbar.Collapse>
+    </Navbar>
+    );
   }
 }
+export default Header;
