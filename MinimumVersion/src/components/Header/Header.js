@@ -18,7 +18,7 @@ class Header extends Component {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">Account</Nav.Link>
+          <Nav.Link href="/Account">Account</Nav.Link>
           <NavDropdown title="Categories" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Clothing</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Books</NavDropdown.Item>
@@ -31,7 +31,7 @@ class Header extends Component {
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="primary">Search</Button>
+          <Button variant="outline-info">Search</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>

@@ -1,25 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import CardList from './containers/CardList';
-import saleData from '../assets/sales.js';
-import Header from './components/Header/Header';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-
-const App = () => {
-  return (
-   <>
-    <Header />
-
-    <div className='container-fluid'>
-      <nav className='navbar sticky-top navbar-light bg-white'>
-        <h1 className='navbar-brand text-dark'>Newly Listed</h1>
-      </nav>
-      <CardList data={saleData} />
-    </div>
-   </>
-  );
-};
-
-ReactDOM.render(<App />, document.getElementById('root'));
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
