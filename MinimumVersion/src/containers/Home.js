@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import CardList from './CardList';
 import saleData from '../../assets/sales.js';
+import NewCardDesign from '../components/Card/NewCardDesign'
 
 
 export default function Home()  {

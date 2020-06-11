@@ -16,10 +16,10 @@ export default function App()  {
 
 
     <Switch>
-      <Route  exact path = "/Home">
+      <Route  exact path = "/">
         <Home />
       </Route>
-      <Route  path = "/">
+      <Route  path = "/Account">
         <Account />
       </Route>
     </Switch>
