@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Helmet from 'react-helmet';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Helmet bodyAttributes={{style: 'background-color : rgb(231, 231, 231)'}}/>
     <App />
   </React.StrictMode>,
   document.getElementById('root')

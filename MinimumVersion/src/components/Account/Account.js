@@ -29,14 +29,14 @@ const Account =() => {
 
 
   return(
-    <>
+    <div>
       <h1>To be an Ebay Killer</h1>
       <form onSubmit={addUser}>
       userName: <input type="text" id="userName" name="userName" onChange={updateUserName}/><br />
       password: <input type="text" id="password" name="password" onChange={updatePassword} /><br />
       <input type="submit" value="Confirm" />
       </form>
-    </>
+    </div>
   );
 }
 

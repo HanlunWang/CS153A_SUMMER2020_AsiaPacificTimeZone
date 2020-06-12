@@ -10,7 +10,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import CategoryIcon from '@material-ui/icons/Category';
-import AddIcon from '@material-ui/icons/Add';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Account from '../Account/Account';
+
 
 const useStyles = makeStyles({
   list: {
@@ -51,21 +54,23 @@ export default function Drawer() {
         <List>
         <ListItemLink href="/Account">
             <AccountCircle />
-            <ListItemText primary="Account" />
+                <ListItemText>
+                    <Link to="/Account">&nbsp;&nbsp;Account</Link>
+                </ListItemText>
         </ListItemLink>
         </List>
       <Divider />
       <List>
         <ListItemLink href="/addItem">
-            <AddIcon />
-            <ListItemText primary="Post My Item" />
+            <AddBoxIcon />
+            <ListItemText primary="&nbsp;&nbsp;Post My Item" />
         </ListItemLink>
         </List>
       <Divider />
       <List>
         <ListItem>
             <CategoryIcon />
-            <ListItemText primary="Categories" />
+            <ListItemText primary="&nbsp;&nbsp;Categories" />
         </ListItem>
       </List>
       <List component="nav">
@@ -92,28 +97,35 @@ export default function Drawer() {
   );
 
   return (
-    <div>
-      {['left'].map((anchor) => (
-        <React.Fragment>
-            <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="open drawer"
-                onClick={toggleDrawer(anchor, true)}
-                >
-                    <MenuIcon />
-            </IconButton>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))}
-    </div>
+    <Router>
+        <div>
+        {['left'].map((anchor) => (
+            <React.Fragment>
+                <IconButton
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={toggleDrawer(anchor, true)}
+                    >
+                        <MenuIcon />
+                </IconButton>
+            <SwipeableDrawer
+                anchor={anchor}
+                open={state[anchor]}
+                onClose={toggleDrawer(anchor, false)}
+                onOpen={toggleDrawer(anchor, true)}
+            >
+                {list(anchor)}
+            </SwipeableDrawer>
+            </React.Fragment>
+        ))}
+        <Switch>
+        <Route  path = "/Account">
+            <Account />
+        </Route>
+        </Switch>
+        </div>
+    </Router>
   );
 }
