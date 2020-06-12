@@ -12,7 +12,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import CategoryIcon from '@material-ui/icons/Category';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Account from '../Account/Account';
+import Account from '../../containers/Home'
+import { Link as RouterLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -52,10 +53,10 @@ export default function Drawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
         <List>
-        <ListItemLink href="/Account">
+        <ListItemLink component={RouterLink} to="/Account">
             <AccountCircle />
                 <ListItemText>
-                    <Link to="/Account">&nbsp;&nbsp;Account</Link>
+                    &nbsp;&nbsp;Account
                 </ListItemText>
         </ListItemLink>
         </List>
@@ -97,7 +98,6 @@ export default function Drawer() {
   );
 
   return (
-    <Router>
         <div>
         {['left'].map((anchor) => (
             <React.Fragment>
@@ -120,12 +120,6 @@ export default function Drawer() {
             </SwipeableDrawer>
             </React.Fragment>
         ))}
-        <Switch>
-        <Route  path = "/Account">
-            <Account />
-        </Route>
-        </Switch>
         </div>
-    </Router>
   );
 }

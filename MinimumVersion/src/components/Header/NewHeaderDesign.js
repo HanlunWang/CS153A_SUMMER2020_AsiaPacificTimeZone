@@ -9,11 +9,12 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Drawer from '../Drawer/Drawer';
+import Button from '@material-ui/core/Button';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -140,13 +141,14 @@ export default function NewHeaderDesign() {
   return (
     
     <div className={classes.grow}>
-        
             <AppBar position='fixed'>
                 <Toolbar>
                 <Drawer />
-                <Typography className={classes.title} variant="h6" noWrap>
-                    BranBay
-                </Typography>
+                <Button variant="contained" component={RouterLink} to="/">
+                  <Typography variant="h5" color="inherit" align="left">
+                      BranBay
+                  </Typography>
+                </Button>
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
                     <SearchIcon />

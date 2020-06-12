@@ -1,18 +1,15 @@
 import React from'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import CardList from './CardList';
-import saleData from '../../assets/sales.js';
 import NewHeaderDesign from '../components/Header/NewHeaderDesign'
+import AccountForm from '../components/Account/AccountForm'
 
 
-export default function Home()  {
+export default function Account()  {
   return (
-
     <div className='container-fluid'>
-      <NewHeaderDesign />
-      <CardList data={saleData} />
+        <NewHeaderDesign />
+        <AccountForm />
     </div>
 
   );
