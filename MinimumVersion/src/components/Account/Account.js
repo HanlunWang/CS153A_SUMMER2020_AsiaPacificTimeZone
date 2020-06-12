@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import useStickyState from '../../useStickyState';
 
-const Account =() => {
+const Account =({data}) => {
 
     // here is where we keep track of the todo list
-  const [users,updateUsers] = useState()
+  const [users,updateUsers] = useStickyState(data, "Register")
 
   // here is where we keep track of the values in the form
   const [userName,setUserName] = useState("")
@@ -13,8 +14,9 @@ const Account =() => {
   const addUser = (event) => {
     //console.log('adding user ')
     //console.dir(event)
-    const users = {id:users.length, userName:userName, password:password, complete:false}
-    //updateUsers(users.concat(users))
+    const lastId = users[users.length-1].id
+    const user = {id:lastId+1, userName:userName, password:password, complete:false}
+    updateUsers(users.concat(user))
     document.getElementById('userName').value = ""
     setUserName("")
     document.getElementById('password').value = ""
@@ -29,14 +31,32 @@ const Account =() => {
 
 
   return(
-    <div>
+    <>
       <h1>To be an Ebay Killer</h1>
       <form onSubmit={addUser}>
-      userName: <input type="text" id="userName" name="userName" onChange={updateUserName}/><br />
-      password: <input type="text" id="password" name="password" onChange={updatePassword} /><br />
-      <input type="submit" value="Confirm" />
+        userName: <input type="text" id="userName" name="userName" onChange={updateUserName}/><br />
+        password: <input type="text" id="password" name="password" onChange={updatePassword} /><br />
+        <input type="submit" value="Confirm" />
       </form>
-    </div>
+
+      <h2>Here is the items JSON object</h2>
+
+      <br />
+      <pre>
+      userName = {JSON.stringify(userName,null,2)}
+      </pre>
+      <br />
+      <pre>
+      password = {JSON.stringify(password, null,2)}
+      </pre>
+      <br />
+      <pre>
+      users ={JSON.stringify(users,null,2)}
+      </pre>
+
+
+
+    </>
   );
 }
 

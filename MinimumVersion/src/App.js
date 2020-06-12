@@ -8,11 +8,11 @@ export default function App()  {
   return (
    <Router>
       <Switch>
-        <Route  exact path = "/">
+        <Route  exact path = "/Account">
           <Home />
         </Route>
-        <Route  path = "/Account">
-          <Account />
+        <Route  path = "/">
+          <Account/>
         </Route>
       </Switch>
    </Router>
