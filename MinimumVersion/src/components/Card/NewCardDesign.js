@@ -72,7 +72,7 @@ export default function NewCardDesign( { sales } ) {
         <Typography variant="h5" color="primary" component="p" align="left">
             {`${sales.price}`}
         </Typography>
-        <Typography variant="subtitle2" color="textSecondary" component="p" align="left">
+        <Typography variant="subtitle2" color="inherit" component="p" align="left">
             {`${sales.name}`}
         </Typography>
       </CardContent>

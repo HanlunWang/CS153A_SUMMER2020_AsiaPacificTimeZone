@@ -8,15 +8,12 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Slide from '@material-ui/core/Slide';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import Drawer from '../Drawer/Drawer';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -109,20 +106,6 @@ export default function NewHeaderDesign() {
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -135,7 +118,7 @@ export default function NewHeaderDesign() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem herf="/cart">
         <IconButton aria-label="cart" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <ShoppingCartIcon />
@@ -143,24 +126,13 @@ export default function NewHeaderDesign() {
         </IconButton>
         <p>Cart</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem herf="/notification">
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
       </MenuItem>
     </Menu>
   );
@@ -171,14 +143,7 @@ export default function NewHeaderDesign() {
         
             <AppBar position='fixed'>
                 <Toolbar>
-                <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                >
-                    <MenuIcon />
-                </IconButton>
+                <Drawer />
                 <Typography className={classes.title} variant="h6" noWrap>
                     BranBay
                 </Typography>
@@ -197,25 +162,15 @@ export default function NewHeaderDesign() {
                 </div>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
-                    <IconButton aria-label="cart" color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        <ShoppingCartIcon />
-                    </Badge>
+                    <IconButton aria-label="cart" color="inherit" herf="/cart">
+                        <Badge badgeContent={4} color="secondary">
+                            <ShoppingCartIcon />
+                        </Badge>
                     </IconButton>
-                    <IconButton aria-label="notifications" color="inherit">
+                    <IconButton aria-label="notifications" color="inherit" herf="notification">
                     <Badge badgeContent={17} color="secondary">
                         <NotificationsIcon />
                     </Badge>
-                    </IconButton>
-                    <IconButton
-                    edge="end"
-                    aria-label="account of current user"
-                    aria-controls={menuId}
-                    aria-haspopup="true"
-                    onClick={handleProfileMenuOpen}
-                    color="inherit"
-                    >
-                    <AccountCircle />
                     </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>
@@ -231,10 +186,9 @@ export default function NewHeaderDesign() {
                 </div>
                 </Toolbar>
             </AppBar>
-            <Toolbar />
-        
+            <Drawer />
+            <Toolbar />      
       {renderMobileMenu}
-      {renderMenu}
     </div>
   );
 }

@@ -10,7 +10,6 @@ import NewHeaderDesign from '../components/Header/NewHeaderDesign'
 
 export default function Home()  {
   return (
-
     <div className='container-fluid'>
       <NewHeaderDesign />
       <CardList data={saleData} />

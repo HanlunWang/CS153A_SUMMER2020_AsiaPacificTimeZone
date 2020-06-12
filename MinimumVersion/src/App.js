@@ -7,6 +7,7 @@ import saleData from '../assets/sales.js';
 import Header from './components/Header/Header';
 import Account from './components/Account/Account';
 import Home from './containers/Home';
+import NewHeaderDesign from './components/Header/NewHeaderDesign'
 
 export default function App()  {
   return (
@@ -15,11 +16,10 @@ export default function App()  {
       <Route  exact path = "/">
         <Home />
       </Route>
-      <Route  path = "/Account">
+      <Route  path = "/account">
         <Account />
       </Route>
     </Switch>
-
    </Router>
   );
 }
