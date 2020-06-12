@@ -11,10 +11,6 @@ import Home from './containers/Home';
 export default function App()  {
   return (
    <Router>
-    <Header />
-
-
-
     <Switch>
       <Route  exact path = "/">
         <Home />
