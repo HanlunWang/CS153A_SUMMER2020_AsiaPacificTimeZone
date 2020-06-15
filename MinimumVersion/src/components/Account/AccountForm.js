@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -67,16 +68,15 @@ export default function SimpleCard() {
                 <br/>
                 <Typography variant="subtitle1" component="subtitle1" color="textSecondary">
                     New customer?&nbsp;
-                    <Link href="/register">
+                    <Link component={RouterLink} to="/Register">
                         Start here.
                     </Link>
                 </Typography>
             </Container>
-                
+
             </CardActions>
             </Card>
       </Container>
 
   );
 }
-
