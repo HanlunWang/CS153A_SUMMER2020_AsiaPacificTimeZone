@@ -3,6 +3,7 @@ import { Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import bohan from './bohan';
+import zheqi from './Zheqi';
 const bios = [
   {name:"Tim",age:64},
   {name:"Caitlin",age:25},
@@ -34,6 +35,13 @@ function HomeScreen({ navigation }) {
         onPress={() => {
           /* 1. Navigate to the Details route with params */
           navigation.navigate('bohan');
+        }}
+      />
+      <Button
+        title="Go to Zheqi's Bio"
+        onPress={() => {
+          /* 1. Navigate to the Details route with params */
+          navigation.navigate('zheqi');
         }}
       />
     </View>
@@ -83,6 +91,7 @@ export default function App() {
         <Stack.Screen name="Details" component={DetailsScreen} />
         <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="bohan" component={bohan} />
+        <Stack.Screen name="zheqi" component={zheqi} />
       </Stack.Navigator>
     </NavigationContainer>
   );
