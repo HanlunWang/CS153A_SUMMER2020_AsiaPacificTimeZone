@@ -4,12 +4,16 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 
 
+
 import Home from './Components/Screens/Home';
 import Profile from './Components/Screens/Profile';
 import AddItem from './Components/Screens/AddItem';
 import Cart from './Components/Screens/Cart';
 
+
 const Tab = createBottomTabNavigator();
+
+
 
 function MyTabs() {
   return (
@@ -63,10 +67,10 @@ function MyTabs() {
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
+export default function App () {
+    return (
+      <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
+    );
 }
