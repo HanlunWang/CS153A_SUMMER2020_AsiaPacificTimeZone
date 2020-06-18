@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         width: 280,
         height: 50,
         borderRadius: 8,
-        backgroundColor: '#66f',
+        backgroundColor: '#737373',
         marginBottom: 8,
     },
     button: {
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
-        backgroundColor: '#66f',
+        backgroundColor: '#737373',
         marginTop: 20,
     },
     btText: {
