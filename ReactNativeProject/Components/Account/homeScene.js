@@ -7,14 +7,8 @@ import {
 } from 'react-native';
 
 
-export default class HomeScene extends Component {
+export default function HomeScene({navigation}) {
 
-    backToLogin = () => {
-        const { goBack } = this.props.navigation;
-        goBack();
-    }
-
-    render() {
         return (
             <View
                 style={styles.container}>
@@ -22,12 +16,11 @@ export default class HomeScene extends Component {
                     style={styles.content}
                 >Welcome Back!</Text>
                 <Button
-                    onPress={this.backToLogin}
+                    onPress={()=> navigation.goBack()}
                     style={styles.button}
                     title='Go back to log in'/>
             </View>
         );
-    }
 
 }
 

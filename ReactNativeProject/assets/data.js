@@ -11,68 +11,68 @@ const data = [{
     },
     {
         "id": 2,
-        "name": "Hair Dryer",
+        "name": "pen",
         "img": {
-            "src": require("../media/HairDryer.jpg"),
-            "alt": "Hair Dryer"
+            "src": require("../media/pen.jpg"),
+            "alt": "pen"
         },
-        "desc": "a 95% new hair dryer",
-        "price": "$10",
-        "category": "electric device"
+        "desc": "",
+        "price": "$3",
+        "category": ""
     },
     {
         "id": 3,
-        "name": "Hair Dryer",
+        "name": "textbook",
         "img": {
-            "src": require("../media/HairDryer.jpg"),
-            "alt": "Hair Dryer"
+            "src": require("../media/book.jpg"),
+            "alt": "textbook"
         },
-        "desc": "a 95% new hair dryer",
-        "price": "$10",
-        "category": "electric device"
+        "desc": "",
+        "price": "$35",
+        "category": ""
     },
     {
         "id": 4,
-        "name": "Hair Dryer",
+        "name": "Airpods Pro",
         "img": {
-            "src": require("../media/HairDryer.jpg"),
-            "alt": "Hair Dryer"
+            "src": require("../media/airpodsPro.jpg"),
+            "alt": "Airpods Pro"
         },
-        "desc": "a 95% new hair dryer",
-        "price": "$10",
+        "desc": "",
+        "price": "$190",
         "category": "electric device"
     },
     {
         "id": 5,
-        "name": "Hair Dryer",
+        "name": "desk",
         "img": {
-            "src": require("../media/HairDryer.jpg"),
-            "alt": "Hair Dryer"
+            "src": require("../media/desk.jpg"),
+            "alt": "desk"
         },
-        "desc": "a 95% new hair dryer",
-        "price": "$10",
-        "category": "electric device"
+        "desc": "a computer desk",
+        "price": "$60",
+        "category": "furniture"
     },
     {
         "id": 6,
-        "name": "Hair Dryer",
+        "name": "chair",
         "img": {
-            "src": require("../media/HairDryer.jpg"),
-            "alt": "Hair Dryer"
+            "src": require("../media/chair.jpg"),
+            "alt": "chair"
         },
-        "desc": "a 95% new hair dryer",
-        "price": "$10",
-        "category": "electric device"
+        "desc": "a used student desk chair",
+        "price": "$60",
+        "category": "furniture"
     },
     {
         "id": 7,
-        "name": "Hair Dryer",
+        "name": "microwave",
         "img": {
-            "src": require("../media/HairDryer.jpg"),
-            "alt": "Hair Dryer"
+            "src": require("../media/microwave.jpg"),
+            "alt": "microwave"
         },
-        "desc": "a 95% new hair dryer",
-        "price": "$10",
+        "desc": "a used microwave from Home Depot",
+        "price": "$200",
         "category": "electric device"
     }
 ]

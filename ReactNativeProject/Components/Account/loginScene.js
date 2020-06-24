@@ -9,64 +9,54 @@ import {
     Button
 } from 'react-native';
 
-export default class LoginScene extends Component {
+export default function LoginScene ({navigation}){
 
-    username = '';
-    password = '';
+    const username = '';
+    const password = '';
 
-    onUsernameChanged = (newUsername) => {
-        console.log(newUsername);
-        this.username = newUsername;
+    const onUsernameChanged = (newUsername) => {
+      console.log(newUsername);
+      username = newUsername;
     };
 
 
-    onPasswordChanged = (newPassword) => {
-        console.log(newPassword);
-        this.password = newPassword;
+    const onPasswordChanged = (newPassword) => {
+      console.log(newPassword);
+      password = newPassword;
     };
 
     /**
      * let the text lose focus
      */
-    blurTextInput = () => {
-        this.refs.username.blur();
-        this.refs.password.blur();
+    const blurTextInput = () => {
+      username.blur();
+      password.blur();
     }
 
     /**
      * log in button
      */
-    login = () => {
-        if (this.username == 'Admin' && this.password == '123') {
-            this.refs.username.blur();
-        	this.refs.password.blur();
-            const { navigate } = this.props.navigation;
-            navigate('Home');
-        } else {
-            Alert.alert("Faild","Incorrect username or password");
-
-        }
+    const login = () => {
+      if (username == 'Admin' && password == '123') {
+          username.blur();
+      	  password.blur();
+          const { navigate } = this.props.navigation;
+          navigate('Home');
+      } else {
+          Alert.alert("Faild","Incorrect username or password");
+      }
     };
 
-    /**
-     * Register button
-     */
-    register = () => {
-        const { navigate } = this.props.navigation;
-        navigate('Register');
-    }
-
-    render() {
         return (
             <TouchableOpacity
             	activeOpacity={1.0}
-            	onPress={this.blurTextInput}
+            	onPress={blurTextInput}
                 style={styles.container}>
                 <View
                     style={styles.inputBox}>
                     <TextInput
                     	ref="username"
-                        onChangeText={this.onUsernameChanged}
+                        onChangeText={onUsernameChanged}
                         style={styles.input}
                         autoCapitalize='none'
                         underlineColorAndroid={'transparent'}
@@ -78,7 +68,7 @@ export default class LoginScene extends Component {
                     style={styles.inputBox}>
                     <TextInput
                     	ref="password"
-                        onChangeText={this.onPasswordChanged}
+                        onChangeText={onPasswordChanged}
                         style={styles.input}
                         autoCapitalize='none'
                         underlineColorAndroid={'transparent'}
@@ -88,20 +78,19 @@ export default class LoginScene extends Component {
                     />
                 </View>
                 <TouchableOpacity
-                    onPress={this.login}
+                    onPress={login}
                     style={styles.button}>
                     <Text
                         style={styles.btText}>Log in</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={this.register}
+                    onPress={() => navigation.navigate('Register')}
                     style={styles.button}>
                     <Text
                         style={styles.btText}>Register</Text>
                 </TouchableOpacity>
             </TouchableOpacity>
         );
-    }
 }
 
 const styles = StyleSheet.create({
