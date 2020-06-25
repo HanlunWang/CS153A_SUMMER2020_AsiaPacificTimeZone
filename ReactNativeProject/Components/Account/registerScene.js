@@ -7,8 +7,9 @@ import {
     Text,
     Alert
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function RegisterScene ({navigation}) {
+export default function RegisterScene ({navigatoin}) {
 
     const [users, setUsers] = useState([])
 
@@ -22,6 +23,9 @@ export default function RegisterScene ({navigation}) {
 }
 
 function UserForm (addUser){
+
+      const navigation = useNavigation();
+      
       const [userName, setUserName] = useState("")
       const [password, setPassword] = useState("")
       const [confirmpwd, setConfirmpwd] = useState("")
@@ -35,9 +39,9 @@ function UserForm (addUser){
           if (userName != '' && password != '') {
               if (userName != 'Admin') {
                   if (password === confirmpwd) {
-                      const { goBack } = navigation;
+                      navigation.goBack();
 
-                      Alert.alert("Succeed","Back to log in",[{text: 'Confirm', onPress: () => { goBack(); }}])
+                      Alert.alert("Succeed","Back to log in",[{text: 'Confirm', onPress: () => { navigation.goBack(); }}])
                   } else {
                       Alert.alert("Fail","Password and confirm password are different");
                   }

@@ -8,10 +8,11 @@ import {
     Alert,
     Button
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function LoginScene ({navigation}){
+export default function LoginScene ({navigatoin}){
 
-    const [users, setUsers] =useState([])
+    const [users, setUsers] =  useState([])
 
     const addUser = (user) => {
       setUsers(users.concat(user))
@@ -22,7 +23,10 @@ export default function LoginScene ({navigation}){
     );
 }
 
-function UserForm ({addUser,navigation}){
+function UserForm ({addUser}){
+
+    const navigation = useNavigation();
+
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
 
@@ -36,10 +40,7 @@ function UserForm ({addUser,navigation}){
      */
     const login = () => {
       if (userName == 'Admin' && password == '123') {
-          userName.blur();
-          password.blur();
-          const { navigate } = navigation;
-          navigate('Home');
+          navigation.navigate('ProfileHome');
       } else {
           Alert.alert("Faild","Incorrect username or password");
       }

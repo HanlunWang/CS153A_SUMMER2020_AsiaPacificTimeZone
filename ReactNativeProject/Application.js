@@ -9,6 +9,9 @@ import Profile from './Components/Screens/Profile';
 import AddItem from './Components/Screens/AddItem';
 import Cart from './Components/Screens/Cart';
 import Detail from './Components/Detail/Detail';
+import Login from './Components/Account/loginScene';
+import Register from './Components/Account/registerScene';
+import ProfileHome from './Components/Account/homeScene';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,7 +65,7 @@ function MyTabs(){
       />
       <Tab.Screen
         name="Profile"
-        component={Profile}
+        component={ProfileStack}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
@@ -84,7 +87,7 @@ function HomeStack (){
       <Stack.Screen
         name = "Home"
         component = {Home}
-        options = {{ title: "Home"}}
+        options = {{ title: "BranBay"}}
       />
       <Stack.Screen
         name = "Detail"
@@ -92,5 +95,28 @@ function HomeStack (){
         options = {{ title: "Detail"}}
       />
     </Stack.Navigator>
+  )
+};
+
+function ProfileStack(){
+  return (
+    <Stack.Navigator initialRouteName = "Login">
+      <Stack.Screen
+        name = "ProfileHome"
+        component = {ProfileHome}
+        options = {{title: "Profile"}}
+      />
+      <Stack.Screen
+        name = "Login"
+        component = {Login}
+        options = {{title: "Login"}}
+      />
+      <Stack.Screen
+        name = "Register"
+        component = {Register}
+        options = {{title: "Register"}}
+      />
+    </Stack.Navigator>
+
   )
 }
