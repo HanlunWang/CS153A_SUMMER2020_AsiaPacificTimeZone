@@ -22,9 +22,11 @@ export default class CreateCart extends React.Component {
         }
         this.setState({cart:cart});
     }
-    const Detail = ({navagation, route}) => {
-      const {cart} =
-    }
+    constructor(props){
+        super(props);
+        this.state={
+            cart:this.props.navigation.getParam('cart'),
+            TotalAmount:0
         }
     }
 

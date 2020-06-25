@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import {
     TouchableOpacity,
     StyleSheet,
@@ -8,88 +8,90 @@ import {
     Alert,
     Button
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-export default function LoginScene ({navigatoin}){
+export default function LoginScene ({navigation}){
 
-    const [users, setUsers] =  useState([])
+    const username = '';
+    const password = '';
 
-    const addUser = (user) => {
-      setUsers(users.concat(user))
-    }
+    const onUsernameChanged = (newUsername) => {
+      console.log(newUsername);
+      username = newUsername;
+    };
 
-    return (
-      <UserForm addUser = {addUser} />
-    );
-}
 
-function UserForm ({addUser}){
+    const onPasswordChanged = (newPassword) => {
+      console.log(newPassword);
+      password = newPassword;
+    };
 
-    const navigation = useNavigation();
-
-    const [userName, setUserName] = useState("")
-    const [password, setPassword] = useState("")
-
-    const handleForm = ()=> {
-      const user = {userName: userName, password: password}
-      addUser(user)
+    /**
+     * let the text lose focus
+     */
+    const blurTextInput = () => {
+      username.blur();
+      password.blur();
     }
 
     /**
      * log in button
      */
     const login = () => {
-      if (userName == 'Admin' && password == '123') {
-          navigation.navigate('ProfileHome');
+      if (username == 'Admin' && password == '123') {
+          username.blur();
+      	  password.blur();
+          const { navigate } = this.props.navigation;
+          navigate('Home');
       } else {
           Alert.alert("Faild","Incorrect username or password");
       }
-    }
-    return (
-        <TouchableOpacity
-            activeOpacity={1.0}
-            style={styles.container}>
-            <View
-                style={styles.inputBox}>
-                <TextInput
-                    onChangeText={text => setUserName(text)}
-                    style={styles.input}
-                    autoCapitalize='none'
-                    underlineColorAndroid={'transparent'}
-                    placeholderTextColor={'#ccc'}
-                    placeholder={'Username'}
-                />
-            </View>
-            <View
-                style={styles.inputBox}>
-                <TextInput
-                    onChangeText={text => setPassword(text)}
-                    style={styles.input}
-                    autoCapitalize='none'
-                    underlineColorAndroid={'transparent'}
-                    secureTextEntry={true}
-                    placeholderTextColor={'#ccc'}
-                    placeholder={'Password'}
-                />
-            </View>
-            <TouchableOpacity
-                onPress={login}
-                style={styles.button}>
-                <Text
-                    style={styles.btText}>Log in</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => navigation.navigate('Register')}
-                style={styles.button}>
-                <Text
-                    style={styles.btText}>Register</Text>
-            </TouchableOpacity>
-        </TouchableOpacity>
-    )
+    };
 
-
+        return (
+            <TouchableOpacity
+            	activeOpacity={1.0}
+            	onPress={blurTextInput}
+                style={styles.container}>
+                <View
+                    style={styles.inputBox}>
+                    <TextInput
+                    	ref="username"
+                        onChangeText={onUsernameChanged}
+                        style={styles.input}
+                        autoCapitalize='none'
+                        underlineColorAndroid={'transparent'}
+                        placeholderTextColor={'#ccc'}
+                        placeholder={'Username'}
+                    />
+                </View>
+                <View
+                    style={styles.inputBox}>
+                    <TextInput
+                    	ref="password"
+                        onChangeText={onPasswordChanged}
+                        style={styles.input}
+                        autoCapitalize='none'
+                        underlineColorAndroid={'transparent'}
+                        secureTextEntry={true}
+                        placeholderTextColor={'#ccc'}
+                        placeholder={'Password'}
+                    />
+                </View>
+                <TouchableOpacity
+                    onPress={login}
+                    style={styles.button}>
+                    <Text
+                        style={styles.btText}>Log in</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Register')}
+                    style={styles.button}>
+                    <Text
+                        style={styles.btText}>Register</Text>
+                </TouchableOpacity>
+            </TouchableOpacity>
+        );
 }
-
 
 const styles = StyleSheet.create({
     container: {
