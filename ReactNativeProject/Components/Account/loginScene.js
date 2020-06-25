@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
     TouchableOpacity,
     StyleSheet,
@@ -11,87 +11,84 @@ import {
 
 export default function LoginScene ({navigation}){
 
-    const username = '';
-    const password = '';
+    const [users, setUsers] =useState([])
 
-    const onUsernameChanged = (newUsername) => {
-      console.log(newUsername);
-      username = newUsername;
-    };
+    const addUser = (user) => {
+      setUsers(users.concat(user))
+    }
 
+    return (
+      <UserForm addUser = {addUser} />
+    );
+}
 
-    const onPasswordChanged = (newPassword) => {
-      console.log(newPassword);
-      password = newPassword;
-    };
+function UserForm ({addUser,navigation}){
+    const [userName, setUserName] = useState("")
+    const [password, setPassword] = useState("")
 
-    /**
-     * let the text lose focus
-     */
-    const blurTextInput = () => {
-      username.blur();
-      password.blur();
+    const handleForm = ()=> {
+      const user = {userName: userName, password: password}
+      addUser(user)
     }
 
     /**
      * log in button
      */
     const login = () => {
-      if (username == 'Admin' && password == '123') {
-          username.blur();
-      	  password.blur();
-          const { navigate } = this.props.navigation;
+      if (userName == 'Admin' && password == '123') {
+          userName.blur();
+          password.blur();
+          const { navigate } = navigation;
           navigate('Home');
       } else {
           Alert.alert("Faild","Incorrect username or password");
       }
-    };
-
-        return (
+    }
+    return (
+        <TouchableOpacity
+            activeOpacity={1.0}
+            style={styles.container}>
+            <View
+                style={styles.inputBox}>
+                <TextInput
+                    onChangeText={text => setUserName(text)}
+                    style={styles.input}
+                    autoCapitalize='none'
+                    underlineColorAndroid={'transparent'}
+                    placeholderTextColor={'#ccc'}
+                    placeholder={'Username'}
+                />
+            </View>
+            <View
+                style={styles.inputBox}>
+                <TextInput
+                    onChangeText={text => setPassword(text)}
+                    style={styles.input}
+                    autoCapitalize='none'
+                    underlineColorAndroid={'transparent'}
+                    secureTextEntry={true}
+                    placeholderTextColor={'#ccc'}
+                    placeholder={'Password'}
+                />
+            </View>
             <TouchableOpacity
-            	activeOpacity={1.0}
-            	onPress={blurTextInput}
-                style={styles.container}>
-                <View
-                    style={styles.inputBox}>
-                    <TextInput
-                    	ref="username"
-                        onChangeText={onUsernameChanged}
-                        style={styles.input}
-                        autoCapitalize='none'
-                        underlineColorAndroid={'transparent'}
-                        placeholderTextColor={'#ccc'}
-                        placeholder={'Username'}
-                    />
-                </View>
-                <View
-                    style={styles.inputBox}>
-                    <TextInput
-                    	ref="password"
-                        onChangeText={onPasswordChanged}
-                        style={styles.input}
-                        autoCapitalize='none'
-                        underlineColorAndroid={'transparent'}
-                        secureTextEntry={true}
-                        placeholderTextColor={'#ccc'}
-                        placeholder={'Password'}
-                    />
-                </View>
-                <TouchableOpacity
-                    onPress={login}
-                    style={styles.button}>
-                    <Text
-                        style={styles.btText}>Log in</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Register')}
-                    style={styles.button}>
-                    <Text
-                        style={styles.btText}>Register</Text>
-                </TouchableOpacity>
+                onPress={login}
+                style={styles.button}>
+                <Text
+                    style={styles.btText}>Log in</Text>
             </TouchableOpacity>
-        );
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Register')}
+                style={styles.button}>
+                <Text
+                    style={styles.btText}>Register</Text>
+            </TouchableOpacity>
+        </TouchableOpacity>
+    )
+
+
 }
+
 
 const styles = StyleSheet.create({
     container: {

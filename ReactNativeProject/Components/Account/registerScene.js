@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState} from 'react';
 import {
     TouchableOpacity,
     StyleSheet,
@@ -8,107 +8,98 @@ import {
     Alert
 } from 'react-native';
 
-export default class RegisterScene extends Component {
+export default function RegisterScene ({navigation}) {
 
-    username = '';
-    password = '';
-    confirmPassword = '';
+    const [users, setUsers] = useState([])
 
-
-    onUsernameChanged = (newUsername) => {
-        console.log(newUsername);
-        this.username = newUsername;
-    };
-
-    onPasswordChanged = (newPassword) => {
-        console.log(newPassword);
-        this.password = newPassword;
-    };
-
-
-    onConfirmPasswordChanged = (newConfirmPassword) => {
-        console.log(newConfirmPassword);
-        this.confirmPassword = newConfirmPassword;
+    const addUser = (user) => {
+      setUsers(users.concat(user))
     }
 
-    blurTextInput = () => {
-        this.refs.username.blur();
-        this.refs.password.blur();
-        this.refs.confirmPassword.blur();
-    }
-
-    register = () => {
-        if (this.username != '' && this.password != '') {
-            if (this.username != 'Admin') {
-                if (this.password === this.confirmPassword) {
-                    const { goBack } = this.props.navigation;
-
-                    Alert.alert("Succeed","Back to log in",[{text: 'Confirm', onPress: () => { goBack(); }}])
-                } else {
-                    Alert.alert("Fail","Password and confirm password are different");
-                }
-            } else {
-                Alert.alert("Fail","This username has been used");
-            }
-        } else {
-            Alert.alert("Fail","Username or password cannot be empty");
-        }
-    };
-
-    render() {
-        return (
-            <TouchableOpacity
-                activeOpacity={1.0}
-                onPress={this.blurTextInput}
-                style={styles.container}>
-                <View
-                    style={styles.inputBox}>
-                    <TextInput
-                        ref="username"
-                        onChangeText={this.onUsernameChanged}
-                        style={styles.input}
-                        autoCapitalize='none'
-                        underlineColorAndroid={'transparent'}
-                        placeholderTextColor={'#ccc'}
-                        placeholder={'Username'}
-                    />
-                </View>
-                <View
-                    style={styles.inputBox}>
-                    <TextInput
-                        ref="password"
-                        onChangeText={this.onPasswordChanged}
-                        style={styles.input}
-                        secureTextEntry={true}
-                        autoCapitalize='none'
-                        underlineColorAndroid={'transparent'}
-                        placeholderTextColor={'#ccc'}
-                        placeholder={'Password'}
-                    />
-                </View>
-                <View
-                    style={styles.inputBox}>
-                    <TextInput
-                        ref="confirmPassword"
-                        onChangeText={this.onConfirmPasswordChanged}
-                        style={styles.input}
-                        secureTextEntry={true}
-                        autoCapitalize='none'
-                        underlineColorAndroid={'transparent'}
-                        placeholderTextColor={'#ccc'}
-                        placeholder={'Confirm password'}
-                    />
-                </View>
-                <TouchableOpacity
-                    onPress={this.register}
-                    style={styles.button}>
-                    <Text
-                        style={styles.btText}>Register</Text>
-                </TouchableOpacity>
-            </TouchableOpacity>
-        );
-    }
+    return (
+      <UserForm addUser = {addUser} />
+    );
 }
+
+function UserForm (addUser){
+      const [userName, setUserName] = useState("")
+      const [password, setPassword] = useState("")
+      const [confirmpwd, setConfirmpwd] = useState("")
+
+      const handleForm = ()=> {
+        const user = {userName: userName, password: password, confirmpwd: confirmpwd}
+        addUser(user)
+      }
+
+      const register = () => {
+          if (userName != '' && password != '') {
+              if (userName != 'Admin') {
+                  if (password === confirmpwd) {
+                      const { goBack } = navigation;
+
+                      Alert.alert("Succeed","Back to log in",[{text: 'Confirm', onPress: () => { goBack(); }}])
+                  } else {
+                      Alert.alert("Fail","Password and confirm password are different");
+                  }
+              } else {
+                  Alert.alert("Fail","This username has been used");
+              }
+          } else {
+              Alert.alert("Fail","Username or password cannot be empty");
+          }
+      }
+      return (
+          <TouchableOpacity
+              activeOpacity={1.0}
+              style={styles.container}>
+              <View
+                  style={styles.inputBox}>
+                  <TextInput
+                      onChangeText={text => setUserName(text)}
+                      style={styles.input}
+                      autoCapitalize='none'
+                      underlineColorAndroid={'transparent'}
+                      placeholderTextColor={'#ccc'}
+                      placeholder={'Username'}
+                  />
+              </View>
+              <View
+                  style={styles.inputBox}>
+                  <TextInput
+                      onChangeText={text => setPassword(text)}
+                      style={styles.input}
+                      secureTextEntry={true}
+                      autoCapitalize='none'
+                      underlineColorAndroid={'transparent'}
+                      placeholderTextColor={'#ccc'}
+                      placeholder={'Password'}
+                  />
+              </View>
+              <View
+                  style={styles.inputBox}>
+                  <TextInput
+                      onChangeText={text => setConfirmpwd(text)}
+                      style={styles.input}
+                      secureTextEntry={true}
+                      autoCapitalize='none'
+                      underlineColorAndroid={'transparent'}
+                      placeholderTextColor={'#ccc'}
+                      placeholder={'Confirm password'}
+                  />
+              </View>
+              <TouchableOpacity
+                  onPress={register}
+                  style={styles.button}>
+                  <Text
+                      style={styles.btText}>Register</Text>
+              </TouchableOpacity>
+          </TouchableOpacity>
+      )
+    }
+
+
+
+
 
 
 const styles = StyleSheet.create({

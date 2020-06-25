@@ -2,8 +2,9 @@ import React from 'react';
 import { TouchableOpacity, FlatList, View, Text, Button, Image } from 'react-native';
 import styled from 'styled-components/native';
 import data from '../../assets/data.js';
+import Detail from '../Detail/Detail';
 
-const Home = ({ navigation }) => {
+function Home({ navigation }){
   return (
     <ListingsWrapper>
       {<Listings
