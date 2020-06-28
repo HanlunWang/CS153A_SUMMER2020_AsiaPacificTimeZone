@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, FlatList, View, Text, Button, Image } from 'react-native';
 import styled from 'styled-components/native';
 import data from '../../assets/data.js';
+import {addToCartData} from '../../assets/cartData.js';
 import Detail from '../Detail/Detail';
 
 function Home({ navigation }){
@@ -16,6 +17,11 @@ function Home({ navigation }){
             <View style={{ flex: 1 }}>
               <Title>{item.name}</Title>
               <Price>{item.price}</Price>
+              <Button
+                onPress={() => addToCartData(item)}
+                title="Add to Cart"
+                color="#002B84"
+              />
             </View>
           </ListingItemWrapper>
         )}
@@ -23,8 +29,6 @@ function Home({ navigation }){
     </ListingsWrapper>
   )
 };
-
-
 
 const ListingsWrapper = styled(View)`
 flex: 1;
