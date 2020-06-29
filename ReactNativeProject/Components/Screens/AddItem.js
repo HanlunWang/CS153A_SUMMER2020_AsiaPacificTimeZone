@@ -1,8 +1,14 @@
-import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Button, TextInput, AsyncStorage, ScrollView, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import {addNewItem} from '../../assets/data.js';
+import { useAsyncStorage } from '@react-native-community/async-storage';
 
-export default function AddItem() {
+
+
+
+//this function is able to make the user add a picture
+function AddPicture() {
   let [selectedImage, setSelectedImage] = React.useState(null);
 
   let openImagePickerAsync = async () => {
@@ -30,11 +36,7 @@ export default function AddItem() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.instructions}>
-        Add a photo of the item for sale!
-      </Text>
-
+    <View>
       <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
         <Text style={styles.buttonText}>Pick a photo</Text>
       </TouchableOpacity>
@@ -42,13 +44,122 @@ export default function AddItem() {
   );
 }
 
+
+
+//this is the item form to handle with item object
+function ItemForm({addItem}){
+  const [itemName, setItemName] = useState("");
+  const [price, setPrice] = useState("");
+
+
+  const handleForm = ()=> {
+    const item = {itemName: itemName, price: price}
+    addItem(item)
+  }
+
+
+
+  return (
+    <TouchableOpacity
+        activeOpacity={1.0}
+        style={styles.container}>
+          <View
+              style={styles.inputBox}>
+              <TextInput
+                  onChangeText={text => setItemName(text)}
+                  style={styles.input}
+                  autoCapitalize='none'
+                  underlineColorAndroid={'transparent'}
+                  placeholderTextColor={'#ccc'}
+                  placeholder={'ItemName'}
+              />
+          </View>
+          <View
+              style={styles.inputBox}>
+              <TextInput
+                  onChangeText={text => setPrice(text)}
+                  style={styles.input}
+                  autoCapitalize='none'
+                  underlineColorAndroid={'transparent'}
+                  placeholderTextColor={'#ccc'}
+                  placeholder={'Price'}
+              />
+          </View>
+          <AddPicture />
+          <TouchableOpacity
+              onPress={handleForm}
+              style={styles.button}>
+              <Text
+                  style={styles.btText}>Submit</Text>
+          </TouchableOpacity>
+    </TouchableOpacity>
+  )
+}
+
+function ShowItems({items}){
+  return (
+    <FlatList
+      data = {items}
+      renderItem = {({ product }) => <ShowItems procut = {product} />}
+      keyExtractor = {(item, index) => "item" + index }
+    />
+  )
+}
+
+function ShowItem ({product}) {
+  return (
+    <View>
+      <Text> {product.name}  {product.price} </Text>
+    </View>
+  )
+}
+
+export default function AddItem(){
+
+  const { getValue, setValue } = useAsyncStorage("");
+  const [items, setItems] = useState([])
+
+  const addItem = (item) => {
+    setItems(items.concat(item))
+  };
+
+  useEffect(() => {getData();},[])
+
+  const saveData = async newValue => {
+    try {
+      await setValue(JSON.stringify(newValue));
+      setItems(newValue);
+    } catch (err){
+      console.log(err)
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const items = await getValue();
+        if (items != null){
+          setItems(JSON.parse(items))
+        }
+
+      }catch (e){
+
+      }
+  };
+
+  return (
+    <TouchableOpacity
+        activeOpacity={1.0}
+        style={styles.container}>
+      <ItemForm addItem={addItem} />
+      <ShowItems items = {items} />
+
+    </TouchableOpacity>
+  )
+}
+
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   logo: {
     width: 305,
     height: 159,
@@ -60,11 +171,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginBottom: 10,
   },
-  button: {
-    backgroundColor: 'blue',
-    padding: 20,
-    borderRadius: 5,
-  },
   buttonText: {
     fontSize: 20,
     color: '#fff',
@@ -74,4 +180,39 @@ const styles = StyleSheet.create({
     height: 300,
     resizeMode: 'contain',
   },
+  container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+  },
+  input: {
+      width: 200,
+      height: 40,
+      fontSize: 20,
+      color: '#fff',
+  },
+  inputBox: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 280,
+      height: 50,
+      borderRadius: 8,
+      backgroundColor: '#737373',
+      marginBottom: 8,
+  },
+  button: {
+      height: 50,
+      width: 280,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 8,
+      backgroundColor: '#737373',
+      marginTop: 20,
+  },
+  btText: {
+      color: '#fff',
+      fontSize: 20,
+  }
 });

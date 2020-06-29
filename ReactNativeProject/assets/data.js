@@ -78,3 +78,7 @@ const data = [{
 ]
 
 export default data;
+
+export function addNewItem(item){
+    data.push(item)
+}
