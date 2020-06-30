@@ -49,15 +49,14 @@ function AddPicture() {
 //this is the item form to handle with item object
 function ItemForm({addItem}){
   const [itemName, setItemName] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
 
 
   const handleForm = ()=> {
     const item = {itemName: itemName, price: price}
     addItem(item)
+
   }
-
-
 
   return (
     <TouchableOpacity
@@ -100,35 +99,36 @@ function ShowItems({items}){
   return (
     <FlatList
       data = {items}
-      renderItem = {({ product }) => <ShowItems procut = {product} />}
+      renderItem = {( {item} ) => <ShowItem item = {item} />}
       keyExtractor = {(item, index) => "item" + index }
     />
   )
 }
 
-function ShowItem ({product}) {
+function ShowItem ({item}) {
   return (
     <View>
-      <Text> {product.name}  {product.price} </Text>
+      <Text> {item.itemName}  {item.price} </Text>
     </View>
   )
 }
 
 export default function AddItem(){
 
-  const { getValue, setValue } = useAsyncStorage("");
+  const { getItem, setItem } = useAsyncStorage("store");
   const [items, setItems] = useState([])
 
   const addItem = (item) => {
     setItems(items.concat(item))
+    saveData(items)
+    console.log("items=" + JSON.stringify(items,null,2))
   };
 
   useEffect(() => {getData();},[])
 
   const saveData = async newValue => {
     try {
-      await setValue(JSON.stringify(newValue));
-      setItems(newValue);
+      await setItem(JSON.stringify(newValue));
     } catch (err){
       console.log(err)
     }
@@ -136,11 +136,10 @@ export default function AddItem(){
 
   const getData = async () => {
     try {
-      const items = await getValue();
+      const items = await getItem();
         if (items != null){
           setItems(JSON.parse(items))
         }
-
       }catch (e){
 
       }
