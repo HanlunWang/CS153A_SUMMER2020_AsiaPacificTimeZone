@@ -8,7 +8,7 @@ import { useAsyncStorage } from '@react-native-community/async-storage';
 
 
 //this function is able to make the user add a picture
-function AddPicture() {
+function AddPicture({addImage}) {
   let [selectedImage, setSelectedImage] = React.useState(null);
 
   let openImagePickerAsync = async () => {
@@ -25,9 +25,11 @@ function AddPicture() {
     }
 
     setSelectedImage({ localUri: pickerResult.uri });
+
   };
 
   if (selectedImage !== null) {
+    addImage(selectedImage.localUri)
     return (
       <View style={styles.container}>
         <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
@@ -50,10 +52,14 @@ function AddPicture() {
 function ItemForm({addItem}){
   const [itemName, setItemName] = useState("");
   const [price, setPrice] = useState(0);
+  const [image, setImage] = useState("");
 
+  const addImage =(image) =>{
+    setImage(image)
+  }
 
   const handleForm = ()=> {
-    const item = {itemName: itemName, price: price}
+    const item = {itemName: itemName, price: price, img: {src: image, alt:"picture"}}
     addItem(item)
 
   }
@@ -84,7 +90,7 @@ function ItemForm({addItem}){
                   placeholder={'Price'}
               />
           </View>
-          <AddPicture />
+          <AddPicture addImage = {addImage}/>
           <TouchableOpacity
               onPress={handleForm}
               style={styles.button}>
@@ -95,33 +101,18 @@ function ItemForm({addItem}){
   )
 }
 
-function ShowItems({items}){
-  return (
-    <FlatList
-      data = {items}
-      renderItem = {( {item} ) => <ShowItem item = {item} />}
-      keyExtractor = {(item, index) => "item" + index }
-    />
-  )
-}
 
-function ShowItem ({item}) {
-  return (
-    <View>
-      <Text> {item.itemName}  {item.price} </Text>
-    </View>
-  )
-}
 
 export default function AddItem(){
 
-  const { getItem, setItem } = useAsyncStorage("store");
+  const { getItem, setItem, clear } = useAsyncStorage("store");
   const [items, setItems] = useState([])
 
   const addItem = (item) => {
-    setItems(items.concat(item))
+    setItems(items.push(item))
     saveData(items)
     console.log("items=" + JSON.stringify(items,null,2))
+    console.log("item=" + JSON.stringify(item,null,2))
   };
 
   useEffect(() => {getData();},[])
@@ -141,17 +132,25 @@ export default function AddItem(){
           setItems(JSON.parse(items))
         }
       }catch (e){
-
+        console.log(e)
       }
   };
+
+  const deleteData = async () =>{
+    try {
+      await AsyncStorage.clear()
+    } catch(e){
+
+    }
+
+    console.log('Clear.')
+  }
 
   return (
     <TouchableOpacity
         activeOpacity={1.0}
         style={styles.container}>
       <ItemForm addItem={addItem} />
-      <ShowItems items = {items} />
-
     </TouchableOpacity>
   )
 }
@@ -175,8 +174,8 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   thumbnail: {
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
     resizeMode: 'contain',
   },
   container: {
