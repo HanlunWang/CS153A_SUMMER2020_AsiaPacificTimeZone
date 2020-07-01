@@ -88,6 +88,7 @@ function ItemForm({addItem}){
                   underlineColorAndroid={'transparent'}
                   placeholderTextColor={'#ccc'}
                   placeholder={'Price'}
+                  keyboardType='numeric'
               />
           </View>
           <AddPicture addImage = {addImage}/>
@@ -109,7 +110,7 @@ export default function AddItem(){
   const [items, setItems] = useState([])
 
   const addItem = (item) => {
-    setItems(items.push(item))
+    setItems(items.concat(item))
     saveData(items)
     console.log("items=" + JSON.stringify(items,null,2))
     console.log("item=" + JSON.stringify(item,null,2))

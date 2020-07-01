@@ -6,7 +6,7 @@ import {addToCartData} from '../../assets/cartData.js';
 import Detail from '../Detail/Detail';
 import { useAsyncStorage } from '@react-native-community/async-storage';
 import ItemList from '../Item/ItemList';
-
+import ReloadItemList from '../Item/ReloadItemList';
 
 function Home({ navigation }){
 
@@ -35,8 +35,9 @@ function Home({ navigation }){
   };
 
   return (
-    <ItemList items = {items || []} />
-    
+    <ListingsWrapper>
+      <ReloadItemList items = {items || []} />
+    </ListingsWrapper>
   )
 };
 

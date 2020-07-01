@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     TouchableOpacity,
     StyleSheet,
@@ -9,37 +9,45 @@ import {
     Button
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useAsyncStorage } from '@react-native-community/async-storage';
 
-export default function LoginScene ({navigatoin}){
-
-    const [users, setUsers] =  useState([])
-
-    const addUser = (user) => {
-      setUsers(users.concat(user))
-    }
-
-    return (
-      <UserForm addUser = {addUser} />
-    );
-}
-
-function UserForm ({addUser}){
+export default function LoginScene (){
 
     const navigation = useNavigation();
+
+    const [user, setUser] = useState("");
+    const { getItem, setItem } = useAsyncStorage("account");
 
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
 
-    const handleForm = ()=> {
-      const user = {userName: userName, password: password}
-      addUser(user)
-    }
+    useEffect(() => {getData();},[])
+
+    const saveData = async newValue => {
+      try {
+        await setItem(JSON.stringify(newValue));
+      } catch (err){
+        console.log(err)
+      }
+    };
+
+    const getData = async () => {
+      try {
+        const oldUser = await getItem();
+          if (oldUser != null){
+            setUser(JSON.parse(oldUser))
+            console.log("olduser=" + JSON.stringify(oldUser,null,2))
+          }
+        }catch (e){
+
+        }
+    };
 
     /**
      * log in button
      */
     const login = () => {
-      if (userName == 'Admin' && password == '123') {
+      if (userName == user.userName && password == user.password) {
           navigation.navigate('ProfileHome');
       } else {
           Alert.alert("Faild","Incorrect username or password");
@@ -89,6 +97,14 @@ function UserForm ({addUser}){
 
 
 }
+
+
+
+
+
+
+
+
 
 
 const styles = StyleSheet.create({
