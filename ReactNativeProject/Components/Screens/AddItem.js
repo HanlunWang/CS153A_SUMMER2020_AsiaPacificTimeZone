@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, Button, TextInput, AsyncStorage, ScrollView, FlatList } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Button, TextInput, AsyncStorage, ScrollView, FlatList, Keyboard } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import {addNewItem} from '../../assets/data.js';
 import { useAsyncStorage } from '@react-native-community/async-storage';
@@ -67,7 +67,10 @@ function ItemForm({addItem}){
   return (
     <TouchableOpacity
         activeOpacity={1.0}
-        style={styles.container}>
+        style={styles.container}
+        onPress = {Keyboard.dismiss}
+        >
+
           <View
               style={styles.inputBox}>
               <TextInput

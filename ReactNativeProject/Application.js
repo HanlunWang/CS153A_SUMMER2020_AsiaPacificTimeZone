@@ -45,7 +45,7 @@ function MyTabs(){
       />
       <Tab.Screen
         name="AddItem"
-        component={AddItem}
+        component={AddItemStack}
         options={{
           tabBarLabel: 'Add Items',
           tabBarIcon: ({ color, size }) => (
@@ -55,7 +55,7 @@ function MyTabs(){
       />
       <Tab.Screen
         name="Cart"
-        component={Cart}
+        component={CartStack}
         options={{
           tabBarLabel: 'Shopping Cart',
           tabBarIcon: ({ color, size }) => (
@@ -93,6 +93,36 @@ function HomeStack (){
         name = "Detail"
         component = {Detail}
         options = {{ title: "Detail"}}
+      />
+    </Stack.Navigator>
+  )
+};
+
+function AddItemStack (){
+  return (
+    <Stack.Navigator
+      initialRouteName ="AddItem"
+      screenOptions = {{ gestureEnabled: false }}
+    >
+      <Stack.Screen
+        name = "AddItem"
+        component = {AddItem}
+        options = {{ title: "Add an item"}}
+      />
+    </Stack.Navigator>
+  )
+};
+
+function CartStack (){
+  return (
+    <Stack.Navigator
+      initialRouteName ="Cart"
+      screenOptions = {{ gestureEnabled: false }}
+    >
+      <Stack.Screen
+        name = "Cart"
+        component = {Cart}
+        options = {{ title: "Shopping cart"}}
       />
     </Stack.Navigator>
   )
