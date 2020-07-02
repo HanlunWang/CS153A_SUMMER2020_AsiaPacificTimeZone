@@ -6,7 +6,8 @@ import {
     View,
     Text,
     Alert,
-    Button
+    Button,
+    Keyboard
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAsyncStorage } from '@react-native-community/async-storage';
@@ -47,6 +48,7 @@ export default function LoginScene (){
      * log in button
      */
     const login = () => {
+      getData()
       if (userName == user.userName && password == user.password) {
           navigation.navigate('ProfileHome');
       } else {
@@ -56,7 +58,8 @@ export default function LoginScene (){
     return (
         <TouchableOpacity
             activeOpacity={1.0}
-            style={styles.container}>
+            style={styles.container}
+            onPress = {Keyboard.dismiss}>
             <View
                 style={styles.inputBox}>
                 <TextInput
@@ -66,6 +69,7 @@ export default function LoginScene (){
                     underlineColorAndroid={'transparent'}
                     placeholderTextColor={'#ccc'}
                     placeholder={'Username'}
+                    
                 />
             </View>
             <View

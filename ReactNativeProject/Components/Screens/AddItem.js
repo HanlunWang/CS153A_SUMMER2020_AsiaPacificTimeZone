@@ -31,9 +31,7 @@ function AddPicture({addImage}) {
   if (selectedImage !== null) {
     addImage(selectedImage.localUri)
     return (
-      <View style={styles.container}>
         <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
-      </View>
     );
   }
 
@@ -153,7 +151,9 @@ export default function AddItem(){
   return (
     <TouchableOpacity
         activeOpacity={1.0}
-        style={styles.container}>
+        style={styles.container}
+        onPress = {Keyboard.dismiss}
+    >
       <ItemForm addItem={addItem} />
     </TouchableOpacity>
   )

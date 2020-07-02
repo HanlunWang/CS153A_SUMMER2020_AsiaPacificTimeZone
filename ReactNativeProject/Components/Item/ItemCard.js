@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { TouchableOpacity, View, Text, Button, Image } from 'react-native';
 import styled from 'styled-components/native';
 import { useAsyncStorage } from '@react-native-community/async-storage';
+import {Icon} from 'react-native-elements';
 
 export default function ItemCard ({item}) {
 
@@ -42,7 +43,7 @@ export default function ItemCard ({item}) {
       <View style={{ flex: 1 }}>
         <Title>{item.itemName}</Title>
         <Price>${item.price}</Price>
-        <Button onPress = {addToCart} title="add to shopping cart" />
+        <Icon raised name = "shopping-basket-add" type="fontisto" onPress = {addToCart} />
       </View>
     </ListingItemWrapper>
   )

@@ -90,9 +90,9 @@ function HomeStack (){
         options = {{ title: "BranBay"}}
       />
       <Stack.Screen
-        name = "Detail"
-        component = {Detail}
-        options = {{ title: "Detail"}}
+        name = "AddItem"
+        component = {AddItemStack}
+        options = {{ title: "Add an Item"}}
       />
     </Stack.Navigator>
   )
@@ -145,6 +145,11 @@ function ProfileStack(){
         name = "Register"
         component = {Register}
         options = {{title: "Register"}}
+      />
+      <Stack.Screen
+        name = "home"
+        component = {Home}
+        options = {{title: "home"}}
       />
     </Stack.Navigator>
 

@@ -5,7 +5,8 @@ import {
     TextInput,
     View,
     Text,
-    Alert
+    Alert,
+    Keyboard
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAsyncStorage } from '@react-native-community/async-storage';
@@ -57,6 +58,7 @@ export default function RegisterScene () {
                   const newUser = {userName: inputUserName, password: inputPassword}
                   setUser(newUser)
                   saveData(newUser)
+                  getData()
                   console.log("user=" + JSON.stringify(user,null,2))
                   console.log("newuser=" + JSON.stringify(newUser,null,2))
                   console.log("inputUserName=" + JSON.stringify(inputUserName,null,2))
@@ -76,7 +78,8 @@ export default function RegisterScene () {
   return (
       <TouchableOpacity
           activeOpacity={1.0}
-          style={styles.container}>
+          style={styles.container}
+          onPress = {Keyboard.dismiss}>
           <View
               style={styles.inputBox}>
               <TextInput

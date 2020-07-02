@@ -16,9 +16,9 @@ export default function HomeScene({navigation}) {
                     style={styles.content}
                 >Welcome Back!</Text>
                 <Button
-                    onPress={()=> navigation.goBack()}
+                    onPress={()=> navigation.navigate("home")}
                     style={styles.button}
-                    title='Go back to log in'/>
+                    title='Go to home page'/>
             </View>
         );
 
