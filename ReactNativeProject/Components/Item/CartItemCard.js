@@ -42,7 +42,6 @@ export default function ItemCard ({item}) {
       <View style={{ flex: 1 }}>
         <Title>{item.itemName}</Title>
         <Price>${item.price}</Price>
-        <Button onPress = {addToCart} title="add to shopping cart" />
       </View>
     </ListingItemWrapper>
   )

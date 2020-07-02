@@ -122,7 +122,7 @@ function CartStack (){
       <Stack.Screen
         name = "Cart"
         component = {Cart}
-        options = {{ title: "Shopping cart"}}
+        options = {{ title: "Shopping Cart"}}
       />
     </Stack.Navigator>
   )

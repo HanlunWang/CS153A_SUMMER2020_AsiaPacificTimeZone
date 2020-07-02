@@ -36,7 +36,7 @@ function Home({ navigation }){
 
   return (
     <ListingsWrapper>
-      <ReloadItemList items = {items || []} />
+      <ItemList items = {items || []} />
     </ListingsWrapper>
   )
 };

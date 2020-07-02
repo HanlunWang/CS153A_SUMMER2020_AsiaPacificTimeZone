@@ -7,6 +7,7 @@ import Detail from '../Detail/Detail';
 import { useAsyncStorage } from '@react-native-community/async-storage';
 import ItemList from '../Item/ItemList';
 import ReloadItemList from '../Item/ReloadItemList';
+import CartItemList from '../Item/CartItemList';
 
 function Cart({ navigation }){
 
@@ -26,6 +27,7 @@ function Cart({ navigation }){
   const getData = async () => {
     try {
       const items = await getItem();
+        console.log("Items in the cart", JSON.stringify(items,null,2))
         if (items != null){
           setItems(JSON.parse(items))
         }
@@ -36,7 +38,7 @@ function Cart({ navigation }){
 
   return (
     <ListingsWrapper>
-      <ReloadItemList items = {items || []} />
+      <CartItemList items = {items||[]} />
     </ListingsWrapper>
   )
 };
